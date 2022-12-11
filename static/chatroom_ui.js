@@ -7,25 +7,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
     var callEndBttn = document.getElementById("call_end");
 
     camera_mute_checkbox.addEventListener('change', () => {
-        if (!videoError) {
-            camera_enabled = camera_mute_checkbox.checked;
-            setVideoState(camera_enabled);
-        }
-        else {
-            camera_mute_checkbox.checked = false;
-            alert("Error! Your camera can not be accessed!");
-        }
+        camera_enabled = camera_mute_checkbox.checked;
+        setVideoMuteState(camera_enabled)
     });
 
     mic_mute_checkbox.addEventListener('change', function () {
-        if (!audioError) {
-            mic_enabled = mic_mute_checkbox.checked;
-            setAudioState(mic_enabled);
-        }
-        else {
-            mic_mute_checkbox.checked = false;
-            alert("Error! Your mic can not be accessed!");
-        }
+        mic_enabled = mic_mute_checkbox.checked;
+        setAudioMuteState(mic_enabled);
     });
 
     callEndBttn.addEventListener("click", (event) => {
@@ -75,7 +63,7 @@ function getVideoObj(element_id) {
     return document.getElementById("vid_" + element_id);
 }
 
-function setVideoState(flag) {
+function setVideoMuteState(flag) {
     let stream = document.querySelector("#videoElement").srcObject;
     let track = stream.getVideoTracks();
     for (let i = 0; i < track.length; i++) {
@@ -83,7 +71,7 @@ function setVideoState(flag) {
     }
 }
 
-function setAudioState(flag) {
+function setAudioMuteState(flag) {
     let stream = document.querySelector("#videoElement").srcObject;
     let track = stream.getAudioTracks();
     for (let i = 0; i < track.length; i++) {
